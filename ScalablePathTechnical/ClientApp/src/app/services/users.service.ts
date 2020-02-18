@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
 
 @Injectable({
-    provideIn: 'root'
+    providedIn: 'root'
 })
 export class UsersService {
     public userChanged = new Subject<UserModel[]>();
