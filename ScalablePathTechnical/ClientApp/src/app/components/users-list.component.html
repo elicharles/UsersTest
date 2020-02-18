@@ -1,0 +1,35 @@
+<h1>Users List</h1>
+
+<div>
+  <table class='table table-striped' *ngIf="users">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>DOB</th>
+        <th>Lead Source</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let user of users'>
+        <td>
+          {{ user.id }}
+        </td>
+        <td>
+          {{ user.name }}
+        </td>
+        <td>
+          {{ user.dob | date }}
+        </td>
+        <td>
+          {{ user.lead_source }}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <div *ngIf="!users">
+    No Users to Show!
+  </div>
+</div>

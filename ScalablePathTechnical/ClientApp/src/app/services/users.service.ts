@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient } from '@angular/common/http';
-import {User} from '../models/users.model';
 import { Subject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
 
 @Injectable({
@@ -9,10 +9,10 @@ import { UserModel } from '../models/user.model';
 })
 export class UsersService {
     public userChanged = new Subject<UserModel[]>();
-    public users: User[] = [];
+    public users: UserModel[] = [];
 
     constructor(private httpClient: HttpClient){
-        this.httpClient.get<User[]>('').subscribe((list) => {
+        this.httpClient.get<UserModel[]>(`${environment.apiUrl}/api/TaskItems`).subscribe((list) => {
             this.users = list;
             this.userChanged.next(list);
         }

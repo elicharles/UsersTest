@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ScalablePathTechnical.Data;
+using ScalablePathTechnical.Models;
 
 namespace ScalablePathTechnical.Controllers
 {
@@ -11,10 +14,13 @@ namespace ScalablePathTechnical.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private IEnumerable<Models.User> _users;
-        public UsersController()
+        private readonly UsersDBContext _context;
+
+        public UsersController(UsersDBContext context)
         {
-            _users =  new List<Models.User>()
+            _context = context;
+        }
+        private static readonly IEnumerable<User> _users = new List<User>()
             {
                 new Models.User
                 {
@@ -52,12 +58,22 @@ namespace ScalablePathTechnical.Controllers
                     Lead_Source = "friends"
                 }
 
-            };
-        }
+        };
+
 
         [HttpGet]
-        public ActionResult<IEnumerable<Models.User>> GetUserItems()
+        public IEnumerable<Models.User> GetUserItems()
         {
+            return _users;
         }
+
+
+        // GET: api/TaskItems
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<User>>> GetUserItems()
+        //{
+        //    return await _context.Users.ToListAsync();
+        //}
+
     }
-    }
+}

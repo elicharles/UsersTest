@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import {UsersService} from './services/users.service';
+import { UsersListComponent } from './components/users-list.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +24,14 @@ import {UsersService} from './services/users.service';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      RouterModule.forRoot([
+          { path: '', component: UsersListComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'users' , }
+      { path: 'users' , component: UsersListComponent}
     ])
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
